@@ -1,0 +1,37 @@
+﻿@page
+@model Bookstore2.Pages.DonateModel
+@{
+}
+<h2>Your Basket</h2>
+<table class="table table-success table-striped">
+    <thead>
+        <tr class="table-primary">
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model.basket.Items) //used bootstrap to change classes on table to change formatting, and colors 
+            {
+                <tr>
+                    <td class="table-warning">@i.Book.Category</td>
+                    <td class="table-info">@i.Quantity</td>
+                    <th>25</th>
+                    <td class="table-light">@(i.Quantity * 25)</td>
+                </tr>
+            }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<!--BootStrap Used to make Continue shopping button a blue alert-->
+<div class="alert alert-primary" role="alert">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
+</div>
