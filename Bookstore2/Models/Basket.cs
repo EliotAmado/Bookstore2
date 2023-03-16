@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookstore2.Models;
 
 namespace Bookstore2.Models
 {
@@ -10,7 +12,7 @@ namespace Bookstore2.Models
     {
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>(); //first class declares second class instastiates
 
-        public void AddItem (Book proj, int qty)
+        public virtual void AddItem (Book proj, int qty)
         {
             BasketLineItem line = Items
                 .Where(p => p.Book.BookId == proj.BookId)
@@ -30,6 +32,17 @@ namespace Bookstore2.Models
             }
         }
 
+        //These next two methods will let the user delete/remove items from their cart
+        public virtual void RemoveItem(Book proj)
+        {
+            Items.RemoveAll(x => x.Book.BookId == proj.BookId);
+        }
+
+        public virtual void ClearBasket()
+        {
+            Items.Clear();
+        }
+
         public double CalculateTotal()
         {
             double sum = Items.Sum(x => x.Quantity * 25);
@@ -40,9 +53,11 @@ namespace Bookstore2.Models
 
     public class BasketLineItem
     {
+        [Key]
         public int LineID { get; set; }
         public Book Book { get; set; }
         public int Quantity { get; set; }
 
     }
 }
+
