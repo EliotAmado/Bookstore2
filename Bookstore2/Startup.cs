@@ -34,7 +34,7 @@ namespace Bookstore2
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
 
-            services.AddScoped<IBookStoreRepository, EFBookstoreRepository>(); //layer to decouple?
+            services.AddScoped<IDonationRepository, EFBookstoreRepository>(); //layer to decouple?   
 
             services.AddRazorPages();
 
@@ -43,7 +43,7 @@ namespace Bookstore2
             services.AddSession();
 
             services.AddScoped<Basket>(x => SessionBasket.GetBasket(x)); //gets a new basket method
-            services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
