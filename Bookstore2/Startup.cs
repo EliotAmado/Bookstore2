@@ -34,7 +34,8 @@ namespace Bookstore2
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
 
-            services.AddScoped<IDonationRepository, EFBookstoreRepository>(); //layer to decouple?   
+            services.AddScoped<IBookStoreRepository, EFBookstoreRepository>(); //How is my EFbookstore reposisotry suppose to look like?
+            services.AddScoped<IDonationRepository, EFDonationRepository>(); //layer to decouple?   
 
             services.AddRazorPages();
 

@@ -5,6 +5,9 @@
 <p>Please enter your details, and we will get your donation to those who need it!</p>
 
 <form method="post" asp-controller="Donation" asp-action="Checkout">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     <h4>Ship To</h4>
     <div class="form-group">
         <label asp-for="Name">Name:</label><input asp-for="Name" class="=from-control" />
